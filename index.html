@@ -1,23 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wright University</title>
-    <link rel="stylesheet" href="./assets/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        /* 顶部导航栏 */
+        header {
+            background-color: #08688b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:16px 60px;
+        }
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap:12px;
+            color:#81d4fa;
+            font-size:18px;
+            font-weight:bold;
+        }
+        .logo-img{
+            width:42px;
+            height:42px;
+        }
+        .nav-right{
+            display:flex;
+            gap:32px;
+            align-items:center;
+        }
+        .nav-item{
+            color:#ffffff;
+            cursor:pointer;
+            display:flex;
+            align-items:center;
+            gap:4px;
+        }
+        .btn-orange{
+            background-color:#ff8800;
+            color:white;
+            border:none;
+            padding:8px 18px;
+            border-radius:4px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        /* Banner横幅 */
+        .banner{
+            background: linear-gradient(90deg, #044b82 0%, rgba(4,75,130,0.25) 60%), url("https://picsum.photos/id/64/1920/700");
+            background-size: cover;
+            background-position:center;
+            min-height:460px;
+            color:white;
+            padding:60px 60px;
+        }
+        .banner h1{
+            font-size:48px;
+            margin-bottom:24px;
+        }
+        .banner-info-row{
+            display:flex;
+            gap:40px;
+            margin-bottom:28px;
+            font-size:20px;
+        }
+        .text-blue{
+            color:#81d4fa;
+        }
+        .text-orange{
+            color:#ffaa22;
+        }
+        .banner-desc{
+            font-size:14px;
+            margin-top:12px;
+            opacity:0.9;
+        }
+        /* 标语板块 */
+        .section-slogan{
+            padding:60px 20px;
+            text-align:center;
+        }
+        .section-slogan h2{
+            font-size:36px;
+            line-height:1.6;
+        }
+        .hl-yellow{
+            color:#ffcc22;
+        }
+        .hl-orange{
+            color:#ff8822;
+        }
+        .section-slogan p{
+            margin-top:24px;
+            color:#336688;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="./index.html">Home</a>
-        <a href="./courses.html">Courses</a>
-        <a href="./teachers.html">Teachers</a>
-        <a href="./about.html">About</a>
-        <a href="./contact.html">Contact</a>
-        <a href="./privacy.html">Privacy Policy</a>
-    </nav>
-    <main>
-        <h1>欢迎</h1>
-        <p>网站本地测试页面</p>
-    </main>
+    <header>
+        <div class="logo-wrap">
+            <img class="logo-img" src="https://p3-flow-image-sign.byteimg.com/tos-cn-i-a9rns2rl98/310013008394404894d41d4002413311~tplv-a9rns2rl98-image.image" alt="Wright University Seal">
+            <span>WRIGHT UNIVERSITY</span>
+        </div>
+        <div class="nav-right">
+            <div class="nav-item"> 关于 ▾</div>
+            <div class="nav-item"> 项目 ▾</div>
+            <div class="nav-item"> 学生资源 ▾</div>
+            <button class="btn-orange">立即申请</button>
+        </div>
+    </header>
+
+    <div class="banner">
+        <h1>完成你的学位</h1>
+        <div class="banner-info-row">
+            <span class="text-blue">最多90学分转入</span>
+            <span class="text-orange">每月39美元 /学位1500美元</span>
+        </div>
+        <button class="btn-orange">看看你能转多少学分</button>
+        <p class="banner-desc">试试我们的学分转移计算器，看看你离完成学位还有多近。</p>
+    </div>
+
+    <div class="section-slogan">
+        <h2>莱特是<span class="hl-yellow">新</span><br>莱特是<span class="hl-orange">不同</span></h2>
+        <p>Wright University获得了美国认证的能力型项目，允许你以适合生活节奏完成学位。</p>
+    </div>
+
 </body>
 </html>
