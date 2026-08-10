@@ -106,7 +106,6 @@
             flex-shrink: 0;
         }
 
-        /* 校徽图片样式 */
         .logo img {
             height: 38px;
             width: auto;
@@ -682,6 +681,19 @@
             border-radius: 12px;
             display: inline-block;
             margin-bottom: 6px;
+        }
+
+        /* ---- 学费显示 ---- */
+        .program-card .tuition {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .program-card .tuition span {
+            color: var(--primary);
+            font-weight: 700;
         }
 
         .program-card h4 {
@@ -1285,13 +1297,11 @@
         <div class="container">
             <a href="#" class="logo">
                 <!-- ★★★ 校徽图片：assets/白底校徽.png ★★★ -->
-                <!-- 如果图片是 jpg 或 svg，请将 .png 改为对应扩展名 -->
                 <img src="assets/白底校徽.png" alt="Wright University Logo" />
                 Wright<span>University</span>
             </a>
 
             <ul class="nav-links" id="navLinks">
-                <!-- 关于 -->
                 <li class="dropdown" data-dropdown>
                     <a href="#" class="dropdown-toggle">
                         关于 <i class="fas fa-chevron-down"></i>
@@ -1303,13 +1313,11 @@
                     </ul>
                 </li>
 
-                <!-- 项目 -->
                 <li class="dropdown" data-dropdown>
                     <a href="#" class="dropdown-toggle">
                         项目 <i class="fas fa-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <!-- 计算机学院 -->
                         <li class="dropdown-sub" data-dropdown>
                             <a href="#" class="dropdown-toggle">
                                 计算机学院 <i class="fas fa-chevron-right"></i>
@@ -1325,7 +1333,6 @@
                                 <li><a href="#" data-program="信息技术硕士">信息技术硕士</a></li>
                             </ul>
                         </li>
-                        <!-- 商学院 -->
                         <li class="dropdown-sub" data-dropdown>
                             <a href="#" class="dropdown-toggle">
                                 商学院 <i class="fas fa-chevron-right"></i>
@@ -1345,7 +1352,6 @@
                     </ul>
                 </li>
 
-                <!-- 学生资源 -->
                 <li class="dropdown" data-dropdown>
                     <a href="#" class="dropdown-toggle">
                         学生资源 <i class="fas fa-chevron-down"></i>
@@ -1448,7 +1454,6 @@
                 </div>
             </div>
 
-            <!-- 学习成果 -->
             <div class="outcomes" id="outcomes">
                 <div class="outcome-item">
                     <i class="fas fa-lightbulb"></i>
@@ -1490,50 +1495,60 @@
                     <i class="fas fa-laptop-code"></i> 计算机学院
                 </div>
                 <div class="program-grid">
+                    <!-- 学士 -->
                     <div class="program-card" data-program="计算机科学荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>计算机科学荣誉学士</h4>
                         <p>算法、系统、人工智能与软件工程</p>
                         <button class="detail-btn" onclick="openModal('计算机科学荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="人工智能荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>人工智能荣誉学士</h4>
                         <p>机器学习、深度学习、自然语言处理</p>
                         <button class="detail-btn" onclick="openModal('人工智能荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="数学科学荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>数学科学荣誉学士</h4>
                         <p>应用数学、统计、数据科学基础</p>
                         <button class="detail-btn" onclick="openModal('数学科学荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="信息技术荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>信息技术荣誉学士</h4>
                         <p>网络、系统管理、信息安全</p>
                         <button class="detail-btn" onclick="openModal('信息技术荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
+                    <!-- 硕士 -->
                     <div class="program-card" data-program="计算机科学硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>计算机科学硕士</h4>
                         <p>高级算法、分布式系统、AI 进阶</p>
                         <button class="detail-btn" onclick="openModal('计算机科学硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="人工智能硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>人工智能硕士</h4>
                         <p>深度强化学习、AI 伦理、生成模型</p>
                         <button class="detail-btn" onclick="openModal('人工智能硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="数学科学硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>数学科学硕士</h4>
                         <p>数值分析、优化、机器学习理论</p>
                         <button class="detail-btn" onclick="openModal('数学科学硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="信息技术硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>信息技术硕士</h4>
                         <p>高级网络安全、云架构、IT 战略</p>
                         <button class="detail-btn" onclick="openModal('信息技术硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
@@ -1547,56 +1562,67 @@
                     <i class="fas fa-chart-line"></i> 商学院
                 </div>
                 <div class="program-grid">
+                    <!-- 学士 -->
                     <div class="program-card" data-program="金融学荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>金融学荣誉学士</h4>
                         <p>公司金融、投资分析、金融市场</p>
                         <button class="detail-btn" onclick="openModal('金融学荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="金融科技荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>金融科技荣誉学士</h4>
                         <p>区块链、数字货币、金融编程</p>
                         <button class="detail-btn" onclick="openModal('金融科技荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="国际商务荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>国际商务荣誉学士</h4>
                         <p>跨国管理、贸易、全球营销</p>
                         <button class="detail-btn" onclick="openModal('国际商务荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="会计学荣誉学士">
                         <span class="degree-type">荣誉学士 · 3年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>36,000元</span></div>
                         <h4>会计学荣誉学士</h4>
                         <p>财务会计、审计、税务</p>
                         <button class="detail-btn" onclick="openModal('会计学荣誉学士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
+                    <!-- 硕士 -->
                     <div class="program-card" data-program="金融学硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>金融学硕士</h4>
                         <p>高级公司金融、风险管理、量化方法</p>
                         <button class="detail-btn" onclick="openModal('金融学硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="金融科技硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>金融科技硕士</h4>
                         <p>金融数据科学、区块链应用、监管科技</p>
                         <button class="detail-btn" onclick="openModal('金融科技硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="国际商务硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>国际商务硕士</h4>
                         <p>全球战略、跨文化管理、国际法</p>
                         <button class="detail-btn" onclick="openModal('国际商务硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="会计学硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>会计学硕士</h4>
                         <p>高级审计、国际会计、数据分析</p>
                         <button class="detail-btn" onclick="openModal('会计学硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
                     </div>
                     <div class="program-card" data-program="工商管理硕士">
                         <span class="degree-type">硕士 · 1年</span>
+                        <div class="tuition">300元/学分 · 总学费 <span>18,000元</span></div>
                         <h4>工商管理硕士</h4>
                         <p>综合管理、领导力、创业</p>
                         <button class="detail-btn" onclick="openModal('工商管理硕士')">查看详情 <i class="fas fa-arrow-right"></i></button>
@@ -1726,6 +1752,7 @@
                     <li><strong>核心课程：</strong>示例课程1、示例课程2</li>
                     <li><strong>学分要求：</strong>120 学分</li>
                     <li><strong>学制：</strong>3 年</li>
+                    <li><strong>学费总额：</strong>36,000元 (300元/学分 × 120学分)</li>
                 </ul>
                 <p>了解更多信息，请填写申请表单或联系招生办公室。</p>
             </div>
@@ -1798,7 +1825,7 @@
         (function() {
             'use strict';
 
-            // ---------- 1. 导航菜单 ----------
+            // ---------- 导航菜单 ----------
             const navbar = document.getElementById('navbar');
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
@@ -1902,7 +1929,7 @@
                 });
             });
 
-            // ---------- 2. 统计动画 ----------
+            // ---------- 统计动画 ----------
             const stats = document.querySelectorAll('.hero-stats .stat h3');
             const originalTexts = [];
             stats.forEach(el => {
@@ -1934,130 +1961,130 @@
             window.addEventListener('scroll', animateStats);
             window.addEventListener('load', function() { setTimeout(animateStats, 400); });
 
-            // ---------- 3. 专业数据 ----------
+            // ---------- 专业数据 ----------
             const programData = {
                 '计算机科学荣誉学士': {
                     description: '计算机科学荣誉学士学位为学生提供坚实的算法基础、编程技能和系统设计能力。课程涵盖数据结构、操作系统、网络、数据库以及人工智能前沿技术。',
                     courses: '算法设计与分析、操作系统、计算机网络、数据库系统、人工智能导论、软件工程',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '人工智能荣誉学士': {
                     description: '人工智能荣誉学士学位聚焦机器学习、深度学习、自然语言处理和计算机视觉等核心领域，培养学生构建智能系统的能力。',
                     courses: '机器学习、深度学习、自然语言处理、计算机视觉、强化学习、AI 伦理',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '数学科学荣誉学士': {
                     description: '数学科学荣誉学士学位结合数学理论与实际应用，涵盖应用数学、统计、运筹学及数据科学基础。',
                     courses: '高等数学、线性代数、概率论、数理统计、数值分析、运筹学',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '信息技术荣誉学士': {
                     description: '信息技术荣誉学士学位侧重于网络技术、系统管理、信息安全及IT项目管理，培养技术管理与实施人才。',
                     courses: '计算机网络、操作系统管理、信息安全、数据库管理、IT 项目管理',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '计算机科学硕士': {
                     description: '计算机科学硕士项目深入高级算法、分布式系统、AI进阶及大数据处理，适合希望提升科研与工程能力的学生。',
                     courses: '高级算法、分布式系统、机器学习进阶、大数据技术、科研方法论',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '人工智能硕士': {
                     description: '人工智能硕士项目聚焦深度强化学习、生成模型、AI伦理与可解释性，培养AI领域的高级专业人才。',
                     courses: '深度强化学习、生成对抗网络、AI 伦理、计算机视觉进阶、自然语言处理进阶',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '数学科学硕士': {
                     description: '数学科学硕士项目提供数值分析、优化理论、机器学习数学基础等高级课程，为数据科学和金融领域培养定量分析师。',
                     courses: '数值分析、凸优化、机器学习理论、统计推断、应用随机过程',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '信息技术硕士': {
                     description: '信息技术硕士项目涵盖高级网络安全、云架构、IT战略及数字化转型，为企业培养技术管理专家。',
                     courses: '网络安全高级、云计算架构、IT 战略、数据治理、企业架构',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '金融学荣誉学士': {
                     description: '金融学荣誉学士学位提供公司金融、投资学、金融市场与金融机构等核心课程，为金融行业培养专业人才。',
                     courses: '公司金融、投资学、金融市场、国际金融、金融计量学',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '金融科技荣誉学士': {
                     description: '金融科技荣誉学士学位结合金融理论与技术，涵盖区块链、数字货币、金融编程及监管科技。',
                     courses: '区块链技术、金融编程、数字货币与支付、金融数据分析、监管科技',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '国际商务荣誉学士': {
                     description: '国际商务荣誉学士学位培养跨国管理、国际贸易、全球营销及跨文化沟通的国际化人才。',
                     courses: '国际管理、国际贸易实务、全球营销、跨文化沟通、国际商法',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '会计学荣誉学士': {
                     description: '会计学荣誉学士学位涵盖财务会计、管理会计、审计、税务及会计信息系统，为会计与财务领域培养专业人才。',
                     courses: '财务会计、管理会计、审计学、税务学、会计信息系统',
-                    credits: '120 学分',
+                    credits: 120,
                     duration: '3 年',
                     degree: '荣誉学士'
                 },
                 '金融学硕士': {
                     description: '金融学硕士项目提供高级公司金融、风险管理、量化金融及投资分析，培养学生成为金融业界精英。',
                     courses: '高级公司金融、风险管理、量化金融、投资组合管理、金融衍生品',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '金融科技硕士': {
                     description: '金融科技硕士项目聚焦金融数据科学、区块链应用、支付系统及数字资产，培养金融科技领域创新人才。',
                     courses: '金融数据科学、区块链与智能合约、数字支付、监管科技、金融创新',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '国际商务硕士': {
                     description: '国际商务硕士项目深入全球战略、跨国管理、国际营销及国际金融，培养全球化商业领袖。',
                     courses: '全球战略管理、跨国运营、国际营销、国际金融、跨文化领导力',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '会计学硕士': {
                     description: '会计学硕士项目提供高级审计、国际会计准则、会计数据分析及公司治理，为会计领域培养高端专业人才。',
                     courses: '高级审计、国际会计、会计数据分析、公司治理、税务策略',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 },
                 '工商管理硕士': {
                     description: '工商管理硕士项目涵盖综合管理、领导力、创业学、战略营销及运营管理，培养未来企业家与管理精英。',
                     courses: '领导力与组织行为、创业学、战略管理、营销管理、运营与供应链',
-                    credits: '60 学分',
+                    credits: 60,
                     duration: '1 年',
                     degree: '硕士'
                 }
             };
 
-            // ---------- 4. 模态框 ----------
+            // ---------- 模态框 ----------
             window.openModal = function(programName) {
                 const modal = document.getElementById('programModal');
                 const title = document.getElementById('modalTitle');
@@ -2065,14 +2092,16 @@
                 const body = document.getElementById('modalBody');
                 const data = programData[programName];
                 if (data) {
+                    const totalTuition = data.credits * 300;
                     title.textContent = programName;
                     degree.textContent = data.degree + ' · ' + data.duration;
                     body.innerHTML = `
                         <p>${data.description}</p>
                         <ul>
                             <li><strong>核心课程：</strong>${data.courses}</li>
-                            <li><strong>学分要求：</strong>${data.credits}</li>
+                            <li><strong>学分要求：</strong>${data.credits} 学分</li>
                             <li><strong>学制：</strong>${data.duration}</li>
+                            <li><strong>学费总额：</strong>${totalTuition.toLocaleString()}元 (300元/学分 × ${data.credits}学分)</li>
                         </ul>
                         <p>如需更详细的信息，请填写申请表单或联系招生办公室。</p>
                     `;
@@ -2107,7 +2136,7 @@
                 });
             });
 
-            // ---------- 5. 表单提交 (Formspree) ----------
+            // ---------- 表单提交 (Formspree) ----------
             const form = document.getElementById('applyForm');
             const successDiv = document.getElementById('formSuccess');
             // ★★★ 将 YOUR_FORMSPREE_ID 替换为您的实际表单 ID ★★★
