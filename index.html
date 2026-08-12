@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wright University | 全球视野</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
         /* ===== 全局样式 ===== */
         * {
@@ -1394,13 +1392,12 @@
                 </div>
                 <p class="subhead">Application Form · 请认真填写所有必填项</p>
 
-                <!-- ★★★ 表单已配置好您的邮箱 ★★★ -->
+                <!-- FormSubmit.co 表单 -->
                 <form class="app-form" id="applicationForm" 
                       action="https://formsubmit.co/admissions@wrightu.online" 
                       method="POST" 
                       enctype="multipart/form-data">
                     
-                    <!-- 隐藏字段，控制防垃圾和重定向 -->
                     <input type="hidden" name="_captcha" value="false" />
                     <input type="hidden" name="_next" value="https://wrightu.online" />
                     <input type="hidden" name="_subject" value="Wright University 新申请" />
@@ -1562,7 +1559,7 @@
                         </div>
                     </div>
 
-                    <!-- ===== 4. 教育背景 ===== -->
+                    <!-- ===== 4. 教育背景（含文件上传） ===== -->
                     <div class="form-section" id="educationSection">
                         <div class="section-title"><i class="fas fa-school"></i> Academic Background 教育背景</div>
                         <p style="color:var(--gray-500); font-size:0.9rem; margin-bottom:16px;">请填写所有高等教育经历，可添加多条。</p>
@@ -1570,7 +1567,7 @@
                         <button type="button" class="add-btn" onclick="addEducationEntry()"><i class="fas fa-plus-circle"></i> 添加教育经历</button>
                     </div>
 
-                    <!-- ===== 5. 语言水平 ===== -->
+                    <!-- ===== 5. 语言水平（含文件上传） ===== -->
                     <div class="form-section" id="languageSection">
                         <div class="section-title"><i class="fas fa-language"></i> Language Proficiency Test 语言水平考试</div>
                         <p style="color:var(--gray-500); font-size:0.9rem; margin-bottom:16px;">请填写已参加的语言测试成绩，可添加多条。</p>
@@ -1584,7 +1581,7 @@
                     </div>
                     <div id="formSuccess" class="form-success">
                         <i class="fas fa-check-circle"></i>
-                        申请已成功提交！正在生成PDF...
+                        申请已成功提交！
                     </div>
 
                 </form>
@@ -1967,7 +1964,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group" style="grid-column: span 2;">
-                            <label style="color:var(--gray-500);font-weight:400;">📎 成绩单/证明文件请发送至 <a href="mailto:admissions@wrightu.online" style="color:var(--primary);text-decoration:underline;">admissions@wrightu.online</a></label>
+                            <label>上传成绩单/证明文件</label>
+                            <input type="file" name="edu_file_${index}" accept=".pdf,.doc,.docx,.jpg,.png" />
                         </div>
                     </div>
                 `;
@@ -2017,7 +2015,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group" style="grid-column: span 2;">
-                            <label style="color:var(--gray-500);font-weight:400;">📎 成绩单/证明文件请发送至 <a href="mailto:admissions@wrightu.online" style="color:var(--primary);text-decoration:underline;">admissions@wrightu.online</a></label>
+                            <label>上传成绩单/证明文件</label>
+                            <input type="file" name="lang_file_${index}" accept=".pdf,.doc,.docx,.jpg,.png" />
                         </div>
                     </div>
                 `;
@@ -2041,37 +2040,6 @@
                     group.remove();
                 }
             };
-
-            // ---------- PDF 生成 ----------
-            async function generatePDF() {
-                const formElement = document.querySelector('.app-form');
-                const submitRow = formElement.querySelector('.submit-row');
-                const successDiv = document.getElementById('formSuccess');
-                submitRow.style.display = 'none';
-                successDiv.style.display = 'none';
-                formElement.querySelectorAll('input, select, textarea').forEach(el => el.disabled = true);
-                await new Promise(r => setTimeout(r, 300));
-                try {
-                    const canvas = await html2canvas(formElement, {
-                        scale: 2,
-                        useCORS: true,
-                        backgroundColor: '#ffffff'
-                    });
-                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF('p', 'mm', 'a4');
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                    pdf.save('Wright_University_Application.pdf');
-                } catch (error) {
-                    console.error('PDF生成失败:', error);
-                } finally {
-                    submitRow.style.display = 'flex';
-                    successDiv.style.display = 'block';
-                    formElement.querySelectorAll('input, select, textarea').forEach(el => el.disabled = false);
-                }
-            }
 
             // ---------- 表单提交 ----------
             const form = document.getElementById('applicationForm');
@@ -2100,7 +2068,6 @@
                     if (response.ok) {
                         successDiv.style.display = 'block';
                         submitBtn.style.display = 'none';
-                        await generatePDF();
                         form.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
                         submitBtn.style.display = 'none';
                     } else {
