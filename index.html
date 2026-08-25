@@ -3,1175 +3,551 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YIFENG在线学院 - 博学笃志，格物致知</title>
+    <title>wright Academy - 博学笃志，格物致知</title>
     <style>
         :root {
-            --primary-dark: #0a1628;
-            --primary-deep: #0d1f3c;
-            --primary-navy: #12294d;
-            --primary-mid: #1a3a6b;
-            --primary-blue: #1e4480;
-            --accent-gold: #c9a84c;
-            --accent-gold-light: #e0c878;
-            --accent-gold-dark: #a8842c;
-            --white: #ffffff;
-            --off-white: #f6f8fb;
-            --light-gray: #e9edf2;
-            --text-dark: #1a1a2e;
-            --text-muted: #4a5568;
-            --text-light: #7a8a9e;
-            --transition: all 0.35s ease;
-            --shadow-sm: 0 2px 10px rgba(10, 22, 40, 0.06);
-            --shadow-md: 0 4px 24px rgba(10, 22, 40, 0.1);
-            --shadow-lg: 0 8px 40px rgba(10, 22, 40, 0.15);
-            --shadow-xl: 0 16px 60px rgba(10, 22, 40, 0.2);
-            --font-serif: 'Georgia', 'Times New Roman', '宋体', 'SimSun', 'Noto Serif SC', serif;
-            --font-sans: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', 'Arial', sans-serif;
+            --primary-dark: #0a1628; --primary-deep: #0d1f3c; --primary-navy: #12294d;
+            --primary-mid: #1a3a6b; --primary-blue: #1e4480; --accent-gold: #c9a84c;
+            --accent-gold-light: #e0c878; --accent-gold-dark: #a8842c; --white: #ffffff;
+            --off-white: #f6f8fb; --light-gray: #e9edf2; --text-dark: #1a1a2e;
+            --text-muted: #4a5568; --text-light: #7a8a9e; --transition: all 0.35s ease;
+            --shadow-sm: 0 2px 10px rgba(10,22,40,0.06); --shadow-md: 0 4px 24px rgba(10,22,40,0.1);
+            --shadow-lg: 0 8px 40px rgba(10,22,40,0.15);
+            --font-serif: 'Georgia','Times New Roman','宋体','SimSun',serif;
+            --font-sans: 'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif;
         }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:var(--font-sans); background:var(--off-white); color:var(--text-dark); line-height:1.7; -webkit-font-smoothing:antialiased; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* 头部 */
+        .header { background:var(--primary-deep); position:sticky; top:0; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.25); border-bottom:3px solid var(--accent-gold); }
+        .header-inner { display:flex; justify-content:space-between; align-items:center; padding:0 32px; min-height:80px; gap:20px; }
+        .logo-section { display:flex; align-items:center; gap:14px; text-decoration:none; flex-shrink:0; cursor:pointer; }
+        .logo-icon { width:50px; height:50px; background:linear-gradient(135deg,var(--accent-gold),var(--accent-gold-dark)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:var(--font-serif); font-size:1.5rem; font-weight:700; color:var(--primary-dark); letter-spacing:1px; box-shadow:0 2px 16px rgba(201,168,76,0.4); flex-shrink:0; }
+        .logo-text { display:flex; flex-direction:column; line-height:1.3; }
+        .logo-text .zh { font-family:var(--font-serif); font-size:1.45rem; font-weight:700; color:var(--white); letter-spacing:4px; white-space:nowrap; }
+        .logo-text .en { font-size:0.62rem; color:rgba(255,255,255,0.55); letter-spacing:2.8px; text-transform:uppercase; font-weight:300; white-space:nowrap; }
+        .main-nav { display:flex; list-style:none; gap:2px; align-items:center; }
+        .main-nav li a { display:block; padding:12px 18px; color:rgba(255,255,255,0.82); text-decoration:none; font-size:0.9rem; font-weight:500; letter-spacing:1.8px; transition:var(--transition); border-radius:4px; position:relative; white-space:nowrap; cursor:pointer; }
+        .main-nav li a::after { content:''; position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:0; height:2px; background:var(--accent-gold); transition:var(--transition); border-radius:1px; }
+        .main-nav li a:hover, .main-nav li a.active { color:var(--white); background:rgba(255,255,255,0.06); }
+        .main-nav li a:hover::after, .main-nav li a.active::after { width:60%; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        /* 页面容器 */
+        .page { display:none; animation:fadeIn 0.4s ease; }
+        .page.active { display:block; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--off-white);
-            color: var(--text-dark);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+        /* 通用横幅 */
+        .page-banner { background:linear-gradient(160deg,var(--primary-dark),var(--primary-deep),var(--primary-navy)); color:var(--white); padding:60px 0 50px; text-align:center; border-bottom:3px solid var(--accent-gold); position:relative; overflow:hidden; }
+        .page-banner::before { content:''; position:absolute; top:-50%; right:-10%; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%); pointer-events:none; }
+        .page-banner h1 { font-family:var(--font-serif); font-size:2.8rem; font-weight:700; letter-spacing:6px; margin-bottom:12px; position:relative; z-index:1; }
+        .page-banner .breadcrumb { font-size:0.85rem; color:rgba(255,255,255,0.6); letter-spacing:2px; position:relative; z-index:1; }
+        .page-banner .breadcrumb .separator { margin:0 10px; color:var(--accent-gold); }
+        .page-content { padding:60px 0 80px; background:var(--white); }
+        .container { max-width:1240px; margin:0 auto; padding:0 24px; }
 
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        /* 首页轮播 */
+        .slider-section { position:relative; overflow:hidden; background:var(--primary-dark); border-bottom:3px solid var(--accent-gold); }
+        .slider-container { position:relative; width:100%; height:420px; overflow:hidden; }
+        .slider-track { display:flex; width:100%; height:100%; transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+        .slider-slide { flex:0 0 100%; height:100%; position:relative; display:flex; align-items:center; justify-content:center; }
+        .slide-content { position:relative; z-index:2; text-align:center; padding:0 24px; max-width:800px; }
+        .slide-badge { display:inline-block; background:rgba(201,168,76,0.2); border:1px solid rgba(201,168,76,0.45); color:var(--accent-gold-light); padding:6px 20px; border-radius:30px; font-size:0.75rem; letter-spacing:3px; font-weight:500; margin-bottom:20px; }
+        .slide-title { font-family:var(--font-serif); font-size:2.4rem; font-weight:700; color:var(--white); letter-spacing:4px; line-height:1.3; margin-bottom:16px; }
+        .slide-subtitle { font-size:1rem; color:rgba(255,255,255,0.75); letter-spacing:2px; line-height:1.8; margin-bottom:24px; }
+        .slide-btn { display:inline-block; padding:12px 32px; background:var(--accent-gold); color:var(--primary-dark); font-size:0.88rem; font-weight:700; letter-spacing:2px; border:none; border-radius:4px; cursor:pointer; transition:var(--transition); font-family:var(--font-sans); text-decoration:none; }
+        .slide-btn:hover { background:var(--accent-gold-light); transform:translateY(-2px); }
+        .slider-dots { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; display:flex; gap:12px; }
+        .slider-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.4); border:2px solid rgba(255,255,255,0.3); cursor:pointer; transition:var(--transition); padding:0; }
+        .slider-dot.active { background:var(--accent-gold); border-color:var(--accent-gold-light); transform:scale(1.2); }
 
-        /* ==================== 头部区域 ==================== */
-        .header {
-            background: var(--primary-deep);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.25);
-            border-bottom: 3px solid var(--accent-gold);
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 32px;
-            min-height: 80px;
-            gap: 20px;
-        }
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-dark));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-            letter-spacing: 1px;
-            box-shadow: 0 2px 16px rgba(201, 168, 76, 0.4);
-            flex-shrink: 0;
-        }
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.3;
-        }
-        .logo-text .zh {
-            font-family: var(--font-serif);
-            font-size: 1.45rem;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: 4px;
-            white-space: nowrap;
-        }
-        .logo-text .en {
-            font-size: 0.62rem;
-            color: rgba(255, 255, 255, 0.55);
-            letter-spacing: 2.8px;
-            text-transform: uppercase;
-            font-weight: 300;
-            white-space: nowrap;
-        }
+        /* 首页新闻 */
+        .home-news { padding:50px 0 60px; background:var(--white); }
+        .news-layout { display:grid; grid-template-columns:240px 1fr; gap:40px; align-items:start; }
+        .news-sidebar { background:linear-gradient(170deg,var(--primary-deep),var(--primary-navy)); border-radius:10px; padding:24px 20px; box-shadow:var(--shadow-md); border:1px solid rgba(201,168,76,0.25); }
+        .news-sidebar .sidebar-title { font-family:var(--font-serif); font-size:1.2rem; font-weight:700; color:var(--white); letter-spacing:2px; margin-bottom:6px; }
+        .news-sidebar .sidebar-subtitle { font-size:0.68rem; color:rgba(255,255,255,0.5); letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+        .news-categories { list-style:none; }
+        .news-categories li a { display:flex; justify-content:space-between; padding:10px 14px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.82rem; letter-spacing:1.2px; border-radius:6px; transition:var(--transition); }
+        .news-categories li a:hover, .news-categories li a.active { color:var(--white); background:rgba(201,168,76,0.12); }
+        .news-list { list-style:none; }
+        .news-list-item { display:flex; align-items:center; justify-content:space-between; padding:14px 10px; border-bottom:1px dashed var(--light-gray); transition:var(--transition); gap:12px; cursor:pointer; border-radius:4px; }
+        .news-list-item:hover { background:var(--off-white); padding-left:16px; padding-right:16px; }
+        .news-list-item .news-info { flex:1; min-width:0; display:flex; align-items:center; gap:14px; }
+        .news-list-item .news-date { flex-shrink:0; font-size:0.75rem; color:var(--text-light); background:var(--off-white); padding:5px 12px; border-radius:4px; border:1px solid var(--light-gray); }
+        .news-list-item .news-title { font-size:0.88rem; color:var(--text-dark); letter-spacing:0.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .news-more-link { flex-shrink:0; color:var(--accent-gold); font-size:0.75rem; font-weight:700; letter-spacing:1.5px; text-decoration:none; transition:var(--transition); }
+        .news-more-link:hover { color:var(--primary-mid); }
 
-        .main-nav {
-            display: flex;
-            list-style: none;
-            gap: 2px;
-            align-items: center;
-        }
-        .main-nav li {
-            position: relative;
-        }
-        .main-nav li a {
-            display: block;
-            padding: 12px 18px;
-            color: rgba(255, 255, 255, 0.82);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1.8px;
-            transition: var(--transition);
-            border-radius: 4px;
-            position: relative;
-            white-space: nowrap;
-        }
-        .main-nav li a::after {
-            content: '';
-            position: absolute;
-            bottom: 4px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--accent-gold);
-            transition: var(--transition);
-            border-radius: 1px;
-        }
-        .main-nav li a:hover,
-        .main-nav li a.active {
-            color: var(--white);
-            background: rgba(255, 255, 255, 0.06);
-        }
-        .main-nav li a:hover::after,
-        .main-nav li a.active::after {
-            width: 60%;
-        }
+        /* 关于我们页面 */
+        .about-grid { display:flex; gap:48px; align-items:center; margin-bottom:48px; }
+        .about-image { flex:1; min-height:380px; background:linear-gradient(150deg,var(--primary-navy),var(--primary-mid),#1e3d66); border-radius:12px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; box-shadow:var(--shadow-lg); border:1px solid rgba(201,168,76,0.2); }
+        .about-image .inner-emblem { font-family:var(--font-serif); font-size:5rem; font-weight:700; color:rgba(255,255,255,0.12); letter-spacing:10px; }
+        .about-image .year-badge { position:absolute; bottom:20px; right:20px; background:rgba(10,22,40,0.85); color:var(--accent-gold-light); padding:8px 16px; border-radius:6px; font-size:0.9rem; letter-spacing:1px; border:1px solid rgba(201,168,76,0.4); }
+        .about-text { flex:1; }
+        .about-text h2 { font-family:var(--font-serif); font-size:1.6rem; font-weight:700; color:var(--primary-deep); margin-bottom:16px; letter-spacing:2px; }
+        .about-text p { color:var(--text-muted); font-size:0.9rem; line-height:2; margin-bottom:12px; letter-spacing:0.5px; }
+        .mission-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:48px; }
+        .mission-card { background:var(--off-white); border-radius:10px; padding:26px 20px; text-align:center; transition:var(--transition); border:1px solid var(--light-gray); }
+        .mission-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(201,168,76,0.4); }
+        .mission-card .card-icon { font-size:2rem; margin-bottom:10px; display:block; }
+        .mission-card h3 { font-family:var(--font-serif); font-size:1.1rem; font-weight:700; color:var(--primary-deep); letter-spacing:2px; margin-bottom:8px; }
+        .mission-card p { font-size:0.8rem; color:var(--text-muted); line-height:1.8; }
 
-        /* ==================== 轮播图区域 ==================== */
-        .slider-section {
-            position: relative;
-            overflow: hidden;
-            background: var(--primary-dark);
-            border-bottom: 3px solid var(--accent-gold);
-        }
-        .slider-container {
-            position: relative;
-            width: 100%;
-            height: 520px;
-            overflow: hidden;
-        }
-        .slider-track {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-        .slider-slide {
-            flex: 0 0 100%;
-            height: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slider-slide .slide-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
-        }
-        .slider-slide .slide-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: linear-gradient(160deg,
-                    rgba(10, 22, 40, 0.75) 0%,
-                    rgba(13, 31, 60, 0.65) 40%,
-                    rgba(18, 41, 77, 0.7) 70%,
-                    rgba(10, 22, 40, 0.85) 100%);
-        }
-        .slide-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 0 24px;
-            max-width: 800px;
-        }
-        .slide-badge {
-            display: inline-block;
-            background: rgba(201, 168, 76, 0.2);
-            border: 1px solid rgba(201, 168, 76, 0.45);
-            color: var(--accent-gold-light);
-            padding: 6px 20px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        .slide-title {
-            font-family: var(--font-serif);
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: 4px;
-            line-height: 1.3;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-        .slide-subtitle {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.75);
-            letter-spacing: 2px;
-            line-height: 1.8;
-            font-weight: 300;
-            margin-bottom: 28px;
-        }
-        .slide-btn {
-            display: inline-block;
-            padding: 13px 36px;
-            background: var(--accent-gold);
-            color: var(--primary-dark);
-            font-size: 0.88rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: var(--font-sans);
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.35);
-        }
-        .slide-btn:hover {
-            background: var(--accent-gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(201, 168, 76, 0.5);
-        }
+        /* 学院、专业、活动、学籍共用卡片样式 */
+        .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+        .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+        .card { background:var(--off-white); border-radius:10px; padding:24px 20px; border:1px solid var(--light-gray); transition:var(--transition); }
+        .card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:rgba(201,168,76,0.4); }
+        .card h3 { font-family:var(--font-serif); font-size:1.1rem; font-weight:700; color:var(--primary-deep); letter-spacing:1.5px; margin-bottom:8px; }
+        .card p { font-size:0.84rem; color:var(--text-muted); line-height:1.8; }
+        .card .badge { display:inline-block; background:var(--primary-navy); color:var(--accent-gold-light); padding:4px 12px; border-radius:20px; font-size:0.68rem; letter-spacing:1.5px; margin-bottom:10px; border:1px solid rgba(201,168,76,0.3); }
+        .filter-bar { display:flex; justify-content:center; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+        .filter-btn { padding:8px 22px; border:1.5px solid var(--light-gray); background:var(--off-white); color:var(--text-muted); font-size:0.8rem; letter-spacing:1.2px; border-radius:30px; cursor:pointer; transition:var(--transition); font-family:var(--font-sans); }
+        .filter-btn:hover, .filter-btn.active { border-color:var(--accent-gold); color:var(--accent-gold-dark); background:rgba(201,168,76,0.08); }
 
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: rgba(10, 22, 40, 0.55);
-            border: 2px solid rgba(201, 168, 76, 0.5);
-            color: var(--white);
-            font-size: 1.6rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            user-select: none;
-            font-weight: 300;
-            line-height: 1;
-        }
-        .slider-arrow:hover {
-            background: rgba(201, 168, 76, 0.35);
-            border-color: var(--accent-gold);
-            color: var(--accent-gold-light);
-        }
-        .slider-arrow.prev {
-            left: 28px;
-        }
-        .slider-arrow.next {
-            right: 28px;
-        }
+        /* 活动页面 */
+        .activity-item { display:flex; gap:20px; background:var(--off-white); border-radius:12px; padding:20px; border:1px solid var(--light-gray); transition:var(--transition); align-items:center; margin-bottom:16px; }
+        .activity-item:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:rgba(201,168,76,0.4); }
+        .activity-date-box { flex-shrink:0; width:70px; height:70px; background:var(--primary-navy); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--white); border:1px solid rgba(201,168,76,0.4); }
+        .activity-date-box .day { font-family:var(--font-serif); font-size:1.6rem; font-weight:700; color:var(--accent-gold-light); line-height:1; }
+        .activity-date-box .month { font-size:0.65rem; letter-spacing:1.5px; color:rgba(255,255,255,0.7); }
+        .activity-details { flex:1; }
+        .activity-details h3 { font-family:var(--font-serif); font-size:1.05rem; font-weight:700; color:var(--primary-deep); letter-spacing:1px; margin-bottom:4px; }
+        .activity-details .activity-meta { display:flex; gap:14px; flex-wrap:wrap; font-size:0.75rem; color:var(--text-light); margin-bottom:6px; }
+        .activity-details p { font-size:0.8rem; color:var(--text-muted); line-height:1.7; }
+        .activity-action a { display:inline-block; padding:8px 18px; border:1.5px solid var(--accent-gold); color:var(--accent-gold-dark); text-decoration:none; font-size:0.75rem; letter-spacing:1.2px; border-radius:6px; transition:var(--transition); }
+        .activity-action a:hover { background:var(--accent-gold); color:var(--primary-dark); }
 
-        .slider-dots {
-            position: absolute;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            display: flex;
-            gap: 14px;
-        }
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 0;
-        }
-        .slider-dot.active {
-            background: var(--accent-gold);
-            border-color: var(--accent-gold-light);
-            box-shadow: 0 0 16px rgba(201, 168, 76, 0.5);
-            transform: scale(1.2);
-        }
-        .slider-dot:hover {
-            background: rgba(255, 255, 255, 0.65);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
+        /* 学籍中心 */
+        .tool-card { text-align:center; }
+        .tool-card .tool-icon { font-size:2.2rem; margin-bottom:10px; display:block; }
+        .tool-card a { display:inline-block; padding:8px 20px; background:var(--accent-gold); color:var(--primary-dark); text-decoration:none; font-size:0.78rem; font-weight:700; letter-spacing:1.2px; border-radius:6px; transition:var(--transition); }
+        .tool-card a:hover { background:var(--accent-gold-light); }
+        .regulation-item { background:var(--off-white); border-radius:10px; padding:18px 20px; border-left:4px solid var(--accent-gold); margin-bottom:14px; }
+        .regulation-item h4 { font-size:0.95rem; font-weight:700; color:var(--primary-deep); letter-spacing:1px; margin-bottom:4px; }
+        .regulation-item p { font-size:0.8rem; color:var(--text-muted); line-height:1.7; }
 
-        /* ==================== 新闻列表区域 ==================== */
-        .news-section {
-            padding: 60px 0 70px;
-            background: var(--white);
-            border-bottom: 1px solid var(--light-gray);
-        }
-        .news-layout {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-        .news-sidebar {
-            background: linear-gradient(170deg, var(--primary-deep) 0%, var(--primary-navy) 60%, var(--primary-mid) 100%);
-            border-radius: 10px;
-            padding: 30px 24px;
-            box-shadow: var(--shadow-md);
-            position: sticky;
-            top: 110px;
-            border: 1px solid rgba(201, 168, 76, 0.25);
-        }
-        .news-sidebar .sidebar-title {
-            font-family: var(--font-serif);
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--white);
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .news-sidebar .sidebar-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(201, 168, 76, 0.4);
-        }
-        .news-sidebar .sidebar-subtitle {
-            font-size: 0.72rem;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            margin-bottom: 22px;
-        }
-        .news-categories {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .news-categories li a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 14px;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 0.86rem;
-            letter-spacing: 1.5px;
-            border-radius: 6px;
-            transition: var(--transition);
-            border: 1px solid transparent;
-        }
-        .news-categories li a:hover,
-        .news-categories li a.active {
-            color: var(--white);
-            background: rgba(201, 168, 76, 0.12);
-            border-color: rgba(201, 168, 76, 0.3);
-        }
-        .news-categories li a .count {
-            font-size: 0.7rem;
-            background: rgba(255, 255, 255, 0.12);
-            padding: 2px 10px;
-            border-radius: 20px;
-            letter-spacing: 0.5px;
-        }
-        .news-categories li a.active .count {
-            background: var(--accent-gold);
-            color: var(--primary-dark);
-            font-weight: 600;
-        }
+        /* 页脚 */
+        .footer { background:var(--primary-dark); color:rgba(255,255,255,0.7); padding:48px 0 0; border-top:3px solid var(--accent-gold); }
+        .footer-grid { display:grid; grid-template-columns:1.8fr 1fr 1fr 1.5fr; gap:32px; padding-bottom:32px; }
+        .footer h4 { color:var(--white); font-family:var(--font-serif); font-size:0.95rem; letter-spacing:1.8px; margin-bottom:14px; }
+        .footer-links { list-style:none; }
+        .footer-links li { margin-bottom:6px; }
+        .footer-links li a { color:rgba(255,255,255,0.55); text-decoration:none; font-size:0.78rem; cursor:pointer; transition:var(--transition); }
+        .footer-links li a:hover { color:var(--accent-gold-light); }
+        .footer-contact p { font-size:0.78rem; color:rgba(255,255,255,0.55); margin-bottom:8px; }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.08); padding:18px 0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:0.72rem; color:rgba(255,255,255,0.38); }
 
-        .news-content {
-            flex: 1;
-            min-width: 0;
-        }
-        .news-content-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            padding-bottom: 14px;
-            border-bottom: 2px solid var(--light-gray);
-        }
-        .news-content-header h3 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-deep);
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .news-content-header h3 .icon {
-            color: var(--accent-gold);
-            font-size: 1.2rem;
-        }
-        .news-content-header .view-all {
-            color: var(--text-light);
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .news-content-header .view-all:hover {
-            color: var(--accent-gold);
-        }
-        .news-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-        }
-        .news-list-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 10px;
-            border-bottom: 1px dashed var(--light-gray);
-            transition: var(--transition);
-            gap: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .news-list-item:last-child {
-            border-bottom: none;
-        }
-        .news-list-item:hover {
-            background: var(--off-white);
-            padding-left: 18px;
-            padding-right: 18px;
-            border-bottom-color: rgba(201, 168, 76, 0.4);
-        }
-        .news-list-item .news-info {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .news-list-item .news-date {
-            flex-shrink: 0;
-            font-family: var(--font-serif);
-            font-size: 0.8rem;
-            color: var(--text-light);
-            letter-spacing: 1px;
-            background: var(--off-white);
-            padding: 6px 14px;
-            border-radius: 4px;
-            border: 1px solid var(--light-gray);
-            transition: var(--transition);
-        }
-        .news-list-item:hover .news-date {
-            border-color: rgba(201, 168, 76, 0.4);
-            color: var(--accent-gold-dark);
-        }
-        .news-list-item .news-title {
-            font-size: 0.92rem;
-            color: var(--text-dark);
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .news-list-item:hover .news-title {
-            color: var(--primary-blue);
-        }
-        .news-more-link {
-            flex-shrink: 0;
-            color: var(--accent-gold);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            transition: var(--transition);
-            padding: 6px 10px;
-            border-radius: 4px;
-            border: 1px solid transparent;
-        }
-        .news-more-link:hover {
-            color: var(--primary-mid);
-            border-color: rgba(201, 168, 76, 0.4);
-            background: rgba(201, 168, 76, 0.06);
-            letter-spacing: 2px;
-        }
-
-        /* ==================== 页脚 ==================== */
-        .footer {
-            background: var(--primary-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 56px 0 0;
-            border-top: 3px solid var(--accent-gold);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.8fr 1fr 1fr 1.5fr;
-            gap: 36px;
-            padding-bottom: 36px;
-        }
-        .footer-about .logo-section {
-            margin-bottom: 14px;
-        }
-        .footer-about .logo-text .zh {
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-        }
-        .footer-about p {
-            font-size: 0.82rem;
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.9;
-            letter-spacing: 0.5px;
-            max-width: 320px;
-        }
-        .footer h4 {
-            color: var(--white);
-            font-family: var(--font-serif);
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: 1.8px;
-            margin-bottom: 18px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .footer h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 32px;
-            height: 2px;
-            background: var(--accent-gold);
-            border-radius: 1px;
-        }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        .footer-links li a {
-            color: rgba(255, 255, 255, 0.55);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.8px;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .footer-links li a::before {
-            content: '›';
-            color: var(--accent-gold);
-            font-size: 1rem;
-            line-height: 1;
-        }
-        .footer-links li a:hover {
-            color: var(--accent-gold-light);
-            transform: translateX(4px);
-        }
-        .footer-contact p {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.55);
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            line-height: 1.6;
-        }
-        .footer-contact p .icon {
-            color: var(--accent-gold);
-            flex-shrink: 0;
-            font-size: 0.9rem;
-            margin-top: 2px;
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .footer-bottom p {
-            font-size: 0.76rem;
-            color: rgba(255, 255, 255, 0.38);
-            letter-spacing: 1px;
-        }
-        .footer-bottom .footer-links-inline {
-            display: flex;
-            gap: 18px;
-            list-style: none;
-        }
-        .footer-bottom .footer-links-inline a {
-            color: rgba(255, 255, 255, 0.38);
-            text-decoration: none;
-            font-size: 0.76rem;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-        }
-        .footer-bottom .footer-links-inline a:hover {
-            color: var(--accent-gold-light);
-        }
-
-        /* ==================== 响应式 ==================== */
-        @media (max-width: 1024px) {
-            .header-inner {
-                flex-wrap: wrap;
-                padding: 12px 20px;
-                gap: 10px;
-            }
-            .main-nav {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .main-nav li a {
-                padding: 8px 14px;
-                font-size: 0.82rem;
-                letter-spacing: 1.2px;
-            }
-            .news-layout {
-                grid-template-columns: 1fr;
-                gap: 28px;
-            }
-            .news-sidebar {
-                position: static;
-            }
-            .news-categories {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-            .news-categories li a {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .slider-container {
-                height: 400px;
-            }
-            .slide-title {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-inner {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 8px;
-                padding: 10px 16px;
-            }
-            .logo-section {
-                justify-content: center;
-            }
-            .main-nav {
-                gap: 0;
-            }
-            .main-nav li a {
-                padding: 7px 10px;
-                font-size: 0.75rem;
-                letter-spacing: 1px;
-            }
-            .slider-container {
-                height: 320px;
-            }
-            .slide-title {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-            .slide-subtitle {
-                font-size: 0.85rem;
-            }
-            .slider-arrow {
-                width: 38px;
-                height: 38px;
-                font-size: 1.2rem;
-            }
-            .slider-arrow.prev {
-                left: 10px;
-            }
-            .slider-arrow.next {
-                right: 10px;
-            }
-            .slider-dots {
-                bottom: 16px;
-            }
-            .slider-dot {
-                width: 9px;
-                height: 9px;
-            }
-            .news-list-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-                padding: 14px 8px;
-            }
-            .news-list-item .news-info {
-                width: 100%;
-                flex-wrap: wrap;
-            }
-            .news-list-item .news-title {
-                white-space: normal;
-                font-size: 0.85rem;
-            }
-            .news-more-link {
-                align-self: flex-end;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .slider-container {
-                height: 260px;
-            }
-            .slide-title {
-                font-size: 1.2rem;
-                letter-spacing: 1.5px;
-            }
-            .slide-badge {
-                font-size: 0.65rem;
-                padding: 4px 14px;
-                letter-spacing: 1.5px;
-            }
-            .slide-btn {
-                padding: 10px 24px;
-                font-size: 0.78rem;
-            }
-            .news-content-header h3 {
-                font-size: 1.2rem;
-            }
-            .logo-text .zh {
-                font-size: 1.2rem;
-                letter-spacing: 2px;
-            }
-            .logo-icon {
-                width: 42px;
-                height: 42px;
-                font-size: 1.2rem;
-            }
-        }
+        /* 响应式 */
+        @media(max-width:1024px) { .header-inner{flex-wrap:wrap; padding:12px 20px;} .main-nav{order:3; width:100%; justify-content:center; flex-wrap:wrap;} .main-nav li a{padding:8px 14px; font-size:0.8rem; letter-spacing:1.2px;} .news-layout{grid-template-columns:1fr;} .news-sidebar{position:static;} .grid-3{grid-template-columns:1fr 1fr;} .about-grid{flex-direction:column;} .about-image{min-height:260px;} .footer-grid{grid-template-columns:1fr 1fr;} }
+        @media(max-width:768px) { .header-inner{flex-direction:column; text-align:center; gap:8px;} .main-nav li a{padding:7px 10px; font-size:0.72rem; letter-spacing:0.8px;} .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} .mission-cards{grid-template-columns:1fr;} .slider-container{height:300px;} .slide-title{font-size:1.5rem; letter-spacing:2px;} .news-list-item{flex-direction:column; align-items:flex-start;} .activity-item{flex-direction:column; align-items:flex-start;} .footer-grid{grid-template-columns:1fr; gap:20px;} .page-banner h1{font-size:1.8rem; letter-spacing:3px;} }
     </style>
 </head>
 <body>
 
-    <!-- ==================== 头部区域 ==================== -->
-    <header class="header">
-        <div class="container header-inner">
-            <!-- 左侧 Logo 和校名 -->
-            <a href="#" class="logo-section">
-                <div class="logo-icon">YF</div>
-                <div class="logo-text">
-                    <span class="zh">YIFENG在线学院</span>
-                    <span class="en">Yifeng Online Academy</span>
-                </div>
-            </a>
-            <!-- 右侧横向导航菜单 -->
-            <ul class="main-nav">
-                <li><a href="#" class="active">首页</a></li>
-                <li><a href="#">关于我们</a></li>
-                <li><a href="#">学院</a></li>
-                <li><a href="#">专业项目</a></li>
-                <li><a href="#">活动发布</a></li>
-                <li><a href="#">学籍中心</a></li>
-            </ul>
-        </div>
-    </header>
+<!-- ==================== 头部导航 ==================== -->
+<header class="header">
+    <div class="container header-inner">
+        <a class="logo-section" onclick="showPage('home')">
+            <div class="logo-icon">YF</div>
+            <div class="logo-text">
+                <span class="zh">wright Academy</span>
+                <span class="en">wright Online Academy</span>
+            </div>
+        </a>
+        <ul class="main-nav">
+            <li><a class="active" data-page="home" onclick="showPage('home')">首页</a></li>
+            <li><a data-page="about" onclick="showPage('about')">关于我们</a></li>
+            <li><a data-page="colleges" onclick="showPage('colleges')">学院</a></li>
+            <li><a data-page="programs" onclick="showPage('programs')">专业项目</a></li>
+            <li><a data-page="activities" onclick="showPage('activities')">活动发布</a></li>
+            <li><a data-page="student" onclick="showPage('student')">学籍中心</a></li>
+        </ul>
+    </div>
+</header>
 
-    <!-- ==================== 轮播图区域 ==================== -->
-    <section class="slider-section" id="slider">
+<!-- ==================== 首页 ==================== -->
+<div class="page active" id="page-home">
+    <!-- 轮播图 -->
+    <section class="slider-section">
         <div class="slider-container">
             <div class="slider-track" id="sliderTrack">
-                <!-- 轮播图 1 -->
-                <div class="slider-slide">
-                    <div class="slide-bg" style="background-image: linear-gradient(135deg, #0a1628 0%, #12294d 30%, #1a3a6b 60%, #1e4480 100%);"></div>
-                    <div class="slide-overlay"></div>
+                <div class="slider-slide" style="background:linear-gradient(135deg,#0a1628,#12294d,#1a3a6b);">
                     <div class="slide-content">
                         <span class="slide-badge">◆ 百年学府 · 底蕴深厚</span>
                         <h2 class="slide-title">博学笃志 · 格物致知</h2>
                         <p class="slide-subtitle">传承百年学术传统，融汇现代教育智慧，培育具有全球视野与人文情怀的时代英才。</p>
-                        <a href="#" class="slide-btn">了解更多</a>
+                        <a class="slide-btn" onclick="showPage('about')">了解更多</a>
                     </div>
                 </div>
-                <!-- 轮播图 2 -->
-                <div class="slider-slide">
-                    <div class="slide-bg" style="background-image: linear-gradient(145deg, #0d1f3c 0%, #1a3355 35%, #1e3d66 65%, #132a52 100%);"></div>
-                    <div class="slide-overlay"></div>
+                <div class="slider-slide" style="background:linear-gradient(145deg,#0d1f3c,#1a3355,#1e3d66);">
                     <div class="slide-content">
                         <span class="slide-badge">◆ 名师荟萃 · 学者云集</span>
                         <h2 class="slide-title">卓越师资 · 引领学术前沿</h2>
                         <p class="slide-subtitle">院士领衔、长江学者云集，以严谨治学之精神，为每一位学子点亮求知之路。</p>
-                        <a href="#" class="slide-btn">了解师资</a>
+                        <a class="slide-btn" onclick="showPage('colleges')">了解学院</a>
                     </div>
                 </div>
-                <!-- 轮播图 3 -->
-                <div class="slider-slide">
-                    <div class="slide-bg" style="background-image: linear-gradient(155deg, #12294d 0%, #1a3a6b 40%, #1e4480 70%, #0d1f3c 100%);"></div>
-                    <div class="slide-overlay"></div>
+                <div class="slider-slide" style="background:linear-gradient(155deg,#12294d,#1a3a6b,#1e4480);">
                     <div class="slide-content">
                         <span class="slide-badge">◆ 数字人文 · 智慧教育</span>
                         <h2 class="slide-title">在线学习 · 随时随地</h2>
                         <p class="slide-subtitle">依托先进在线教育平台，打破时空界限，让优质教育资源触手可及。</p>
-                        <a href="#" class="slide-btn">进入课程</a>
+                        <a class="slide-btn" onclick="showPage('programs')">进入课程</a>
                     </div>
                 </div>
             </div>
-
-            <!-- 左右箭头 -->
-            <button class="slider-arrow prev" id="prevBtn" aria-label="上一张">‹</button>
-            <button class="slider-arrow next" id="nextBtn" aria-label="下一张">›</button>
-
-            <!-- 轮播指示器 -->
             <div class="slider-dots" id="sliderDots">
-                <button class="slider-dot active" data-index="0" aria-label="第1张"></button>
-                <button class="slider-dot" data-index="1" aria-label="第2张"></button>
-                <button class="slider-dot" data-index="2" aria-label="第3张"></button>
+                <button class="slider-dot active" data-index="0"></button>
+                <button class="slider-dot" data-index="1"></button>
+                <button class="slider-dot" data-index="2"></button>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 新闻列表区域 ==================== -->
-    <section class="news-section" id="news">
+    <!-- 新闻区域 -->
+    <section class="home-news">
         <div class="container">
             <div class="news-layout">
-                <!-- 左侧分类标题 -->
                 <aside class="news-sidebar">
                     <h3 class="sidebar-title">新闻中心</h3>
                     <p class="sidebar-subtitle">News Center</p>
                     <ul class="news-categories">
-                        <li>
-                            <a href="#" class="active">
-                                <span>媒体报道</span>
-                                <span class="count">16</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>学院公告</span>
-                                <span class="count">24</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>学术活动</span>
-                                <span class="count">18</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>招生信息</span>
-                                <span class="count">12</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>校友动态</span>
-                                <span class="count">9</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>校园文化</span>
-                                <span class="count">15</span>
-                            </a>
-                        </li>
+                        <li><a class="active">媒体报道 <span>(16)</span></a></li>
+                        <li><a>学院公告 <span>(24)</span></a></li>
+                        <li><a>学术活动 <span>(18)</span></a></li>
+                        <li><a>招生信息 <span>(12)</span></a></li>
+                        <li><a>校友动态 <span>(9)</span></a></li>
                     </ul>
                 </aside>
-
-                <!-- 右侧新闻列表 -->
                 <div class="news-content">
-                    <div class="news-content-header">
-                        <h3>
-                            <span class="icon">📰</span> 媒体报道
-                        </h3>
-                        <a href="#" class="view-all">查看全部 →</a>
-                    </div>
                     <ul class="news-list">
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-06-18</span>
-                                <span class="news-title">【人民日报】YIFENG在线学院：以数字技术赋能传统人文教育</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-06-12</span>
-                                <span class="news-title">【光明日报】扎根中国大地办教育——YIFENG学院人才培养纪实</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-06-05</span>
-                                <span class="news-title">【中国教育报】YIFENG学院探索在线教育高质量发展新路径</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-05-28</span>
-                                <span class="news-title">【新华网】YIFENG在线学院举办数字人文国际学术研讨会</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-05-20</span>
-                                <span class="news-title">【央视网】YIFENG学院3门课程入选国家级一流本科在线课程</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-05-12</span>
-                                <span class="news-title">【中国青年报】YIFENG学院荣获"全国在线教育创新示范单位"称号</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-05-05</span>
-                                <span class="news-title">【科技日报】YIFENG学院研发智能教学系统助力个性化学习</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
-                        <li class="news-list-item">
-                            <div class="news-info">
-                                <span class="news-date">2026-04-28</span>
-                                <span class="news-title">【人民网】YIFENG学院与多所高校共建在线教育资源共享平台</span>
-                            </div>
-                            <a href="#" class="news-more-link">MORE&gt;&gt;</a>
-                        </li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-06-18</span><span class="news-title">【人民日报】wright Academy：以数字技术赋能传统人文教育</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-06-12</span><span class="news-title">【光明日报】扎根中国大地办教育——wright Academy人才培养纪实</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-06-05</span><span class="news-title">【中国教育报】wright Academy探索在线教育高质量发展新路径</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-05-28</span><span class="news-title">【新华网】wright Academy举办数字人文国际学术研讨会</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-05-20</span><span class="news-title">【央视网】wright Academy3门课程入选国家级一流本科在线课程</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-05-12</span><span class="news-title">【中国青年报】wright Academy荣获"全国在线教育创新示范单位"称号</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-05-05</span><span class="news-title">【科技日报】wright Academy研发智能教学系统助力个性化学习</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
+                        <li class="news-list-item"><div class="news-info"><span class="news-date">2026-04-28</span><span class="news-title">【人民网】wright Academy与多所高校共建在线教育资源共享平台</span></div><a class="news-more-link">MORE&gt;&gt;</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+</div>
 
-    <!-- ==================== 页脚 ==================== -->
-    <footer class="footer">
+<!-- ==================== 关于我们页面 ==================== -->
+<div class="page" id="page-about">
+    <section class="page-banner">
         <div class="container">
-            <div class="footer-grid">
-                <!-- 学校标识和简介 -->
-                <div class="footer-about">
-                    <a href="#" class="logo-section">
-                        <div class="logo-icon">YF</div>
-                        <div class="logo-text">
-                            <span class="zh">YIFENG在线学院</span>
-                            <span class="en">Yifeng Online Academy</span>
-                        </div>
-                    </a>
-                    <p>博学笃志，格物致知。以百年树人之志，育时代栋梁之才。YIFENG在线学院欢迎每一位渴求知识的学子，共享优质教育资源，成就卓越人生。</p>
+            <h1>关于我们</h1>
+            <p class="breadcrumb">首页<span class="separator">/</span>关于我们</p>
+        </div>
+    </section>
+    <section class="page-content">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <span class="inner-emblem">YF</span>
+                    <span class="year-badge">Est. 1998</span>
                 </div>
-                <!-- 快速导航 -->
-                <div>
-                    <h4>快速导航</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">关于我们</a></li>
-                        <li><a href="#">学院设置</a></li>
-                        <li><a href="#">专业项目</a></li>
-                        <li><a href="#">活动发布</a></li>
-                        <li><a href="#">学籍中心</a></li>
-                    </ul>
-                </div>
-                <!-- 教学资源 -->
-                <div>
-                    <h4>教学资源</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">在线图书馆</a></li>
-                        <li><a href="#">学术数据库</a></li>
-                        <li><a href="#">课程回放</a></li>
-                        <li><a href="#">学术期刊</a></li>
-                        <li><a href="#">讲座视频</a></li>
-                    </ul>
-                </div>
-                <!-- 联系方式 -->
-                <div class="footer-contact">
-                    <h4>联系我们</h4>
-                    <p><span class="icon">📍</span> 北京市海淀区YIFENG路1号<br>明理楼A座 · 在线教育学院</p>
-                    <p><span class="icon">📞</span> 400-888-9999（工作日 8:30-17:30）</p>
-                    <p><span class="icon">✉️</span> admissions@yifeng.edu.cn</p>
-                    <p><span class="icon">🌐</span> www.yifeng-academy.edu.cn</p>
+                <div class="about-text">
+                    <h2>百年学府 · 历久弥新</h2>
+                    <p>wright Academy始建于1998年，前身为wright人文研究院。二十六载栉风沐雨，学院始终秉持"博学、审问、慎思、明辨、笃行"的校训精神，在人文社科、自然科学、工程技术等领域深耕不辍。</p>
+                    <p>学院汇聚海内外顶尖学者与行业专家，以严谨的学术标准和先进的教学理念，构建了涵盖本科、硕士及继续教育的完整人才培养体系。在线教育平台自2010年上线以来，已为超过12万名来自全球的学子提供优质教育资源。</p>
+                    <p>面向未来，wright Academy将继续以"数字人文、智慧教育"为发展方略，推动教育创新与学术进步。</p>
                 </div>
             </div>
-            <!-- 版权信息 -->
-            <div class="footer-bottom">
-                <p>&copy; 2026 YIFENG在线学院 · 版权所有 · 保留所有权利</p>
-                <ul class="footer-links-inline">
-                    <li><a href="#">隐私政策</a></li>
-                    <li><a href="#">使用条款</a></li>
-                    <li><a href="#">网站地图</a></li>
-                    <li><a href="#">京ICP备2026008888号-1</a></li>
-                </ul>
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <span class="card-icon">🎯</span>
+                    <h3>使命</h3>
+                    <p>传承学术薪火，推动知识创新，以卓越教育培养具有人文情怀、科学精神和社会责任感的时代英才。</p>
+                </div>
+                <div class="mission-card">
+                    <span class="card-icon">🌟</span>
+                    <h3>愿景</h3>
+                    <p>建设世界一流的在线教育平台，成为数字时代人文教育与科技创新融合的典范，让优质教育惠及全球。</p>
+                </div>
+                <div class="mission-card">
+                    <span class="card-icon">📜</span>
+                    <h3>校训</h3>
+                    <p>博学、审问、慎思、明辨、笃行——以严谨治学之精神，涵养深厚学术底蕴，追求真理与卓越。</p>
+                </div>
             </div>
         </div>
-    </footer>
+    </section>
+</div>
 
-    <!-- ==================== 轮播图 JavaScript ==================== -->
-    <script>
-        (function() {
-            const track = document.getElementById('sliderTrack');
-            const slides = track.querySelectorAll('.slider-slide');
-            const dots = document.querySelectorAll('.slider-dot');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const totalSlides = slides.length;
-            let currentIndex = 0;
-            let autoPlayInterval = null;
-            const autoPlayDelay = 5000; // 5秒自动切换
+<!-- ==================== 学院页面 ==================== -->
+<div class="page" id="page-colleges">
+    <section class="page-banner">
+        <div class="container">
+            <h1>学院设置</h1>
+            <p class="breadcrumb">首页<span class="separator">/</span>学院</p>
+        </div>
+    </section>
+    <section class="page-content">
+        <div class="container">
+            <div class="grid-3">
+                <div class="card"><span class="badge">人文学院</span><h3>📜 中国语言文学</h3><p>以经典研读与人文素养培育为核心，传承中华优秀传统文化，培养具有深厚底蕴的学术人才。</p></div>
+                <div class="card"><span class="badge">社会科学学院</span><h3>⚖️ 法学与公共治理</h3><p>涵盖法学、政治学、社会学等学科，培养具有法治思维与社会责任感的高层次专业人才。</p></div>
+                <div class="card"><span class="badge">理学学院</span><h3>🔬 数学与统计学</h3><p>设数学、物理学、化学等基础学科，鼓励基础研究与跨学科探索，培养科学创新人才。</p></div>
+                <div class="card"><span class="badge">工程学院</span><h3>⚙️ 计算机科学与技术</h3><p>聚焦人工智能、数据科学等前沿领域，强化实践创新能力，对接产业发展需求。</p></div>
+                <div class="card"><span class="badge">经济管理学院</span><h3>📊 工商管理</h3><p>设经济学、金融学等专业，培养具备全球视野与战略思维的经济管理领军人才。</p></div>
+                <div class="card"><span class="badge">艺术学院</span><h3>🎨 美术与设计学</h3><p>涵盖美术学、设计学等方向，培养具有创新精神与人文情怀的艺术人才。</p></div>
+            </div>
+        </div>
+    </section>
+</div>
 
-            function goToSlide(index) {
-                if (index < 0) index = totalSlides - 1;
-                if (index >= totalSlides) index = 0;
-                currentIndex = index;
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-                // 更新指示器
-                dots.forEach((dot, i) => {
-                    if (i === currentIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
+<!-- ==================== 专业项目页面 ==================== -->
+<div class="page" id="page-programs">
+    <section class="page-banner">
+        <div class="container">
+            <h1>专业项目</h1>
+            <p class="breadcrumb">首页<span class="separator">/</span>专业项目</p>
+        </div>
+    </section>
+    <section class="page-content">
+        <div class="container">
+            <div class="filter-bar">
+                <button class="filter-btn active">全部</button>
+                <button class="filter-btn">本科</button>
+                <button class="filter-btn">硕士</button>
+                <button class="filter-btn">继续教育</button>
+                <button class="filter-btn">证书课程</button>
+            </div>
+            <div class="grid-2">
+                <div class="card"><span class="badge">本科 · 文学学士</span><h3>中国语言文学</h3><p>系统研习古代文学、现代汉语、文献学等核心课程，培养深厚人文底蕴与学术研究能力。学制4年。</p></div>
+                <div class="card"><span class="badge">本科 · 法学学士</span><h3>法学</h3><p>涵盖法理学、宪法学、民法学、刑法学等，注重法律实务训练与法治思维培养。学制4年。</p></div>
+                <div class="card"><span class="badge">硕士 · 理学硕士</span><h3>数据科学与大数据技术</h3><p>聚焦机器学习、大数据分析、云计算等前沿领域，培养数据科学高级专门人才。学制2年。</p></div>
+                <div class="card"><span class="badge">硕士 · 管理学硕士</span><h3>工商管理（MBA）</h3><p>面向企业中高层管理者，课程涵盖战略管理、市场营销、财务金融等核心模块。学制2年。</p></div>
+                <div class="card"><span class="badge">本科 · 工学学士</span><h3>计算机科学与技术</h3><p>培养掌握计算机软硬件基础、算法设计、系统开发能力的工程技术人才。学制4年。</p></div>
+                <div class="card"><span class="badge">证书课程</span><h3>数字人文与经典传承</h3><p>短期研修项目，结合数字技术探索古籍整理、文化传播与创新应用。学制6个月。</p></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== 活动发布页面 ==================== -->
+<div class="page" id="page-activities">
+    <section class="page-banner">
+        <div class="container">
+            <h1>活动发布</h1>
+            <p class="breadcrumb">首页<span class="separator">/</span>活动发布</p>
+        </div>
+    </section>
+    <section class="page-content">
+        <div class="container">
+            <div class="filter-bar">
+                <button class="filter-btn active">全部活动</button>
+                <button class="filter-btn">学术讲座</button>
+                <button class="filter-btn">招生说明</button>
+                <button class="filter-btn">校园文化</button>
+                <button class="filter-btn">校友活动</button>
+            </div>
+            <div class="activity-item">
+                <div class="activity-date-box"><span class="day">18</span><span class="month">JUL</span></div>
+                <div class="activity-details">
+                    <h3>数字人文与经典传承国际学术研讨会</h3>
+                    <div class="activity-meta"><span>📅 2026年7月18日</span><span>📍 线上直播</span><span>👤 张明远教授</span></div>
+                    <p>围绕数字技术在古籍整理、文化传播中的创新应用展开研讨，邀请12国学者云端对话。</p>
+                </div>
+                <div class="activity-action"><a href="#">报名参加 →</a></div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-date-box"><span class="day">25</span><span class="month">JUL</span></div>
+                <div class="activity-details">
+                    <h3>2026年秋季招生线上说明会</h3>
+                    <div class="activity-meta"><span>📅 2026年7月25日</span><span>📍 线上直播</span><span>👤 招生办公室</span></div>
+                    <p>介绍学院办学特色、专业设置、报考流程，解答考生及家长关心的问题。</p>
+                </div>
+                <div class="activity-action"><a href="#">预约咨询 →</a></div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-date-box"><span class="day">03</span><span class="month">AUG</span></div>
+                <div class="activity-details">
+                    <h3>校友返校日暨创新创业论坛</h3>
+                    <div class="activity-meta"><span>📅 2026年8月3日</span><span>📍 学院报告厅</span><span>👤 全体校友</span></div>
+                    <p>邀请杰出校友分享创业经验，搭建校友交流平台，共话学院发展。</p>
+                </div>
+                <div class="activity-action"><a href="#">报名参加 →</a></div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-date-box"><span class="day">15</span><span class="month">AUG</span></div>
+                <div class="activity-details">
+                    <h3>传统文化与艺术修养系列讲座</h3>
+                    <div class="activity-meta"><span>📅 2026年8月15日</span><span>📍 人文学院</span><span>👤 陈思远教授</span></div>
+                    <p>本场主题为"古典诗词中的家国情怀"，面向全体师生开放。</p>
+                </div>
+                <div class="activity-action"><a href="#">报名参加 →</a></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== 学籍中心页面 ==================== -->
+<div class="page" id="page-student">
+    <section class="page-banner">
+        <div class="container">
+            <h1>学籍中心</h1>
+            <p class="breadcrumb">首页<span class="separator">/</span>学籍中心</p>
+        </div>
+    </section>
+    <section class="page-content">
+        <div class="container">
+            <div class="grid-3" style="margin-bottom:40px;">
+                <div class="card tool-card">
+                    <span class="tool-icon">🔍</span>
+                    <h3>学籍查询</h3>
+                    <p>登录后查询个人学籍状态、注册信息、成绩记录及学业进度。</p>
+                    <a href="#">立即查询 →</a>
+                </div>
+                <div class="card tool-card">
+                    <span class="tool-icon">📄</span>
+                    <h3>学籍证明</h3>
+                    <p>在线申请电子学籍证明、在读证明，支持下载与官方验证。</p>
+                    <a href="#">申请证明 →</a>
+                </div>
+                <div class="card tool-card">
+                    <span class="tool-icon">🔄</span>
+                    <h3>学籍异动</h3>
+                    <p>办理休学、复学、转专业、退学等学籍异动手续，流程透明。</p>
+                    <a href="#">办理异动 →</a>
+                </div>
+            </div>
+            <h2 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--primary-deep);text-align:center;letter-spacing:2px;margin-bottom:24px;">学籍管理规定</h2>
+            <div class="grid-2">
+                <div class="regulation-item"><h4>入学与注册</h4><p>新生须持录取通知书按期办理入学手续，每学期开学时按规定完成注册。未注册者将影响学籍状态。</p></div>
+                <div class="regulation-item"><h4>课程考核与成绩</h4><p>考核分为考试和考查两种，成绩记入本人学籍档案。补考、缓考、重修按学院相关规定执行。</p></div>
+                <div class="regulation-item"><h4>学制与修业年限</h4><p>本科专业基本学制为4年，最长修业年限不超过6年；硕士研究生基本学制为2-3年，最长不超过4年。</p></div>
+                <div class="regulation-item"><h4>毕业与学位授予</h4><p>学生在规定年限内完成培养方案要求，成绩合格，颁发毕业证书；符合学位授予条件者授予相应学位。</p></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a class="logo-section" onclick="showPage('home')" style="margin-bottom:12px;display:flex;">
+                    <div class="logo-icon" style="width:40px;height:40px;font-size:1.2rem;">YF</div>
+                    <div class="logo-text"><span class="zh" style="font-size:1.1rem;">wright Academy</span><span class="en">wright Online Academy</span></div>
+                </a>
+                <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.8;">博学笃志，格物致知。以百年树人之志，育时代栋梁之才。</p>
+            </div>
+            <div>
+                <h4>快速导航</h4>
+                <ul class="footer-links">
+                    <li><a onclick="showPage('about')">关于我们</a></li>
+                    <li><a onclick="showPage('colleges')">学院设置</a></li>
+                    <li><a onclick="showPage('programs')">专业项目</a></li>
+                    <li><a onclick="showPage('activities')">活动发布</a></li>
+                    <li><a onclick="showPage('student')">学籍中心</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>教学资源</h4>
+                <ul class="footer-links">
+                    <li><a>在线图书馆</a></li>
+                    <li><a>学术数据库</a></li>
+                    <li><a>课程回放</a></li>
+                    <li><a>学术期刊</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>联系我们</h4>
+                <p>📍 北京市海淀区wright路1号</p>
+                <p>📞 400-888-9999</p>
+                <p>✉️ admissions@wright.edu.cn</p>
+                <p>🌐 www.wright-academy.edu.cn</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 wright Academy · 版权所有 · 保留所有权利</p>
+            <p>京ICP备2026008888号-1 | 隐私政策 | 使用条款</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ========== 页面切换功能 ==========
+    function showPage(pageId) {
+        // 隐藏所有页面
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => page.classList.remove('active'));
+        // 显示目标页面
+        const targetPage = document.getElementById('page-' + pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+        }
+        // 更新导航高亮
+        const navLinks = document.querySelectorAll('.main-nav li a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
             }
+        });
+        // 滚动到顶部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // 如果切到首页，重置轮播
+        if (pageId === 'home') {
+            resetSlider();
+        }
+    }
 
-            function nextSlide() {
-                goToSlide(currentIndex + 1);
-            }
+    // ========== 轮播功能 ==========
+    let sliderIndex = 0;
+    let sliderInterval = null;
 
-            function prevSlide() {
-                goToSlide(currentIndex - 1);
-            }
+    function goToSlide(index) {
+        const track = document.getElementById('sliderTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        const total = dots.length;
+        if (index < 0) index = total - 1;
+        if (index >= total) index = 0;
+        sliderIndex = index;
+        track.style.transform = `translateX(-${sliderIndex * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === sliderIndex);
+        });
+    }
 
-            function resetAutoPlay() {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                }
-                autoPlayInterval = setInterval(nextSlide, autoPlayDelay);
-            }
+    function resetSlider() {
+        if (sliderInterval) clearInterval(sliderInterval);
+        goToSlide(0);
+        sliderInterval = setInterval(() => goToSlide(sliderIndex + 1), 5000);
+    }
 
-            function startAutoPlay() {
-                resetAutoPlay();
-            }
+    // 轮播点点击
+    document.querySelectorAll('.slider-dot').forEach(dot => {
+        dot.addEventListener('click', function() {
+            goToSlide(parseInt(this.getAttribute('data-index')));
+            if (sliderInterval) clearInterval(sliderInterval);
+            sliderInterval = setInterval(() => goToSlide(sliderIndex + 1), 5000);
+        });
+    });
 
-            function stopAutoPlay() {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                    autoPlayInterval = null;
-                }
-            }
+    // 初始化
+    resetSlider();
 
-            // 事件绑定
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                resetAutoPlay();
-            });
+    // 筛选按钮（视觉交互）
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const parent = this.parentElement;
+            parent.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+</script>
 
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                resetAutoPlay();
-            });
-
-            dots.forEach((dot) => {
-                dot.addEventListener('click', () => {
-                    const index = parseInt(dot.getAttribute('data-index'));
-                    goToSlide(index);
-                    resetAutoPlay();
-                });
-            });
-
-            // 触摸滑动支持
-            let touchStartX = 0;
-            let touchEndX = 0;
-            const sliderContainer = document.querySelector('.slider-container');
-
-            sliderContainer.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                stopAutoPlay();
-            }, { passive: true });
-
-            sliderContainer.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                const difference = touchStartX - touchEndX;
-                if (Math.abs(difference) > 50) {
-                    if (difference > 0) {
-                        nextSlide();
-                    } else {
-                        prevSlide();
-                    }
-                }
-                startAutoPlay();
-            }, { passive: true });
-
-            // 鼠标悬停时暂停自动播放
-            sliderContainer.addEventListener('mouseenter', () => {
-                stopAutoPlay();
-            });
-            sliderContainer.addEventListener('mouseleave', () => {
-                startAutoPlay();
-            });
-
-            // 初始化
-            goToSlide(0);
-            startAutoPlay();
-
-            // 页面可见性变化时处理
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    stopAutoPlay();
-                } else {
-                    startAutoPlay();
-                }
-            });
-        })();
-    </script>
 </body>
 </html>
